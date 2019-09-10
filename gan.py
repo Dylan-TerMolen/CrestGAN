@@ -100,7 +100,7 @@ my_generator = create_generator()
 my_discriminator = create_discriminator()
 
 
-checkpoint_dir = './drive/My Drive/GAN_Training_Checkpoints'
+checkpoint_dir = './drive'
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
                                  discriminator_optimizer=discriminator_optimizer,
@@ -171,9 +171,10 @@ def train(dataset, epochs):
     print('Time for epoch {} is {} sec'.format(epoch + 1, time.time()-start))
 
 
-    # Save the model every 15 epochs
+    # Save the model every 30 epochs
     if (epoch + 1) % 30 == 0:
       checkpoint.save(file_prefix = checkpoint_prefix)
+    # Check progress every 100 epochs
     if epoch % 100 == 0:
       print("Seed is first picture, random is second")
       img = my_generator(GAseed,training=False)
